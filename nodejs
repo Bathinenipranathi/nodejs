@@ -1,0 +1,86 @@
+// helloWorld.js 
+console.log("Hello, World!"); 
+//7
+// getCurrentDateTime.js
+const currentDate = new Date();
+
+console.log(`Current Date and Time: ${currentDate}`);
+
+
+const formattedDateTime = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')} ${currentDate.getHours().toString().padStart(2, '0')}:${currentDate.getMinutes().toString().padStart(2, '0')}:${currentDate.getSeconds().toString().padStart(2, '0')}`;
+console.log(`Formatted Date and Time: ${formattedDateTime}`);
+//8
+const http = require('http');
+const hostname = '127.0.0.1'; 
+const port = 3000; 
+const server = http.createServer((req, res) => { 
+        res.statusCode = 200; 
+        res.setHeader('Content-Type', 'text/html'); 
+        res.end('<h1>Hello from Node.js Server!</h1><p>This is a simple sentence displayed in the browser.</p>'); 
+    });
+
+    server.listen(port, hostname, () => { console.log(`Server running at http://${hostname}:${port}/`); });
+//9
+// server.js
+const http = require('http');
+
+// Create a server object
+const server = http.createServer((req, res) => {
+    // Set the response HTTP header with HTTP status and Content type
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+
+    // Send the response body "Hello from Node.js Server!"
+    res.end('Hello from Node.js Server!\n');
+});
+
+// Server listens on port 3000
+const PORT = 3000;
+server.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}/`);
+});
+//10
+const fs = require('fs');
+
+const appendData = 'This data will be appended to the file.\n';
+
+fs.appendFile('example.txt', appendData, (err) => {
+    if (err) {
+        console.error(err);
+        return;
+    }
+    console.log('Data appended to file!');
+});
+
+const content = 'This data will be written to the file.\n';
+
+fs.open('example2.txt', 'w', (err, fd) => {
+    if (err) {
+        console.error(err);
+        return;
+    }
+
+    fs.writeFile(fd, content, (err) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        console.log('File written successfully!');
+        fs.close(fd, (err) => {
+            if (err) {
+                console.error(err);
+            }
+            console.log('File closed successfully!');
+        });
+    });
+});
+
+
+const data = 'This data will overwrite the content of the file.\n';
+
+fs.writeFile('example3.txt', data, (err) => {
+    if (err) {
+        console.error(err);
+        return;
+    }
+    console.log('File written successfully!');
+});
